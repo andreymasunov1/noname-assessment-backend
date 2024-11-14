@@ -1,4 +1,4 @@
-# Assecor Assessment Test (DE)
+# noname Assessment Test (DE)
 
 ## Zielsetzung
 
@@ -82,7 +82,7 @@ Das Ausgabeformat der Daten ist als `application/json` festgelegt. Die Schnittst
 
 Denk an deine zukünftigen Kollegen, und mach es ihnen nicht zu einfach, indem du deine Lösung öffentlich zur Schau stellst. Danke!
 
-# Assecor Assessment Test (EN)
+# noname Assessment Test (EN)
 
 ## goal
 
