@@ -3,6 +3,7 @@ package org.dci.assecorassessmentbackend.exception;
 import java.time.LocalDateTime;
 
 public class ApiException {
+
   private final String message;
   private final String details;
   private final LocalDateTime timestamp;

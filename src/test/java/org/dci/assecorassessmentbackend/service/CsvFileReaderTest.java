@@ -1,5 +1,15 @@
 package org.dci.assecorassessmentbackend.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Optional;
 import org.dci.assecorassessmentbackend.model.Color;
 import org.dci.assecorassessmentbackend.model.Person;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,25 +18,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class CsvFileReaderTest {
-
-  @InjectMocks
-  private CsvFileReader csvFileReader;
-
-  @Mock
-  private ClassPathResource classPathResource;
 
   private static final String VALID_CSV_LINE = "Doe,John,12345 Sample City,1";
   private static final String MULTILINE_DATA_PART1 = "Doe,John";
   private static final String MULTILINE_DATA_PART2 = "12345 Sample City,1";
   private static final String INVALID_CSV_LINE = "Doe,John,Sample City";
+  @InjectMocks
+  private CsvFileReader csvFileReader;
+  @Mock
+  private ClassPathResource classPathResource;
 
   @BeforeEach
   void setUp() {
@@ -35,7 +36,8 @@ class CsvFileReaderTest {
 
   @Test
   void readData_ShouldReturnListOfPersons_WhenCSVIsValid() throws Exception {
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new ClassPathResource("sample-input.csv").getInputStream()));
+    BufferedReader bufferedReader = new BufferedReader(
+        new InputStreamReader(new ClassPathResource("sample-input.csv").getInputStream()));
     assertNotNull(bufferedReader);
 
     List<Person> persons = csvFileReader.readData();
@@ -46,7 +48,8 @@ class CsvFileReaderTest {
 
   @Test
   void mergeMultiLineData_ShouldMergeLines_WhenMultiLineDataDetected() {
-    Optional<String> mergedLine = csvFileReader.mergeMultiLineData(MULTILINE_DATA_PART2, MULTILINE_DATA_PART1);
+    Optional<String> mergedLine = csvFileReader.mergeMultiLineData(MULTILINE_DATA_PART2,
+        MULTILINE_DATA_PART1);
 
     assertTrue(mergedLine.isPresent());
     assertEquals("Doe,John 12345 Sample City,1", mergedLine.get().trim());
@@ -83,7 +86,8 @@ class CsvFileReaderTest {
 
   @Test
   void extractZipCode_ShouldThrowException_WhenInvalidInput() {
-    assertThrows(IllegalArgumentException.class, () -> csvFileReader.extractZipCode("Invalid City Format"));
+    assertThrows(IllegalArgumentException.class,
+        () -> csvFileReader.extractZipCode("Invalid City Format"));
   }
 
   @Test
@@ -95,7 +99,8 @@ class CsvFileReaderTest {
 
   @Test
   void extractCity_ShouldThrowException_WhenInvalidInput() {
-    assertThrows(IllegalArgumentException.class, () -> csvFileReader.extractCity("Invalid Zip Code"));
+    assertThrows(IllegalArgumentException.class,
+        () -> csvFileReader.extractCity("Invalid Zip Code"));
   }
 
   @Test

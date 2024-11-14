@@ -7,7 +7,12 @@ import org.dci.assecorassessmentbackend.dto.PersonDto;
 import org.dci.assecorassessmentbackend.service.PersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/persons")
@@ -17,6 +22,7 @@ public class PersonController {
 
   /**
    * Constructor-based dependency injection for PersonController.
+   *
    * @param personService Service responsible for handling person-related operations.
    */
   public PersonController(PersonService personService) {
@@ -25,6 +31,7 @@ public class PersonController {
 
   /**
    * Retrieves all persons.
+   *
    * @return ResponseEntity containing a list of all PersonDto objects and HTTP status 200.
    */
   @GetMapping
@@ -35,6 +42,7 @@ public class PersonController {
 
   /**
    * Retrieves a person by their ID.
+   *
    * @param id The ID of the person to retrieve.
    * @return ResponseEntity containing the PersonDto and HTTP status 200.
    */
@@ -46,8 +54,10 @@ public class PersonController {
 
   /**
    * Retrieves all persons filtered by a specific color.
+   *
    * @param color The color to filter by.
-   * @return ResponseEntity containing a list of PersonDto objects filtered by color and HTTP status 200.
+   * @return ResponseEntity containing a list of PersonDto objects filtered by color and HTTP status
+   * 200.
    */
   @GetMapping("/color/{color}")
   public ResponseEntity<List<PersonDto>> getPersonsByColor(@PathVariable("color") String color) {
@@ -57,6 +67,7 @@ public class PersonController {
 
   /**
    * Creates a new person.
+   *
    * @param personCreateDto The data transfer object containing person details.
    * @return ResponseEntity containing the created PersonDto and HTTP status 201.
    */

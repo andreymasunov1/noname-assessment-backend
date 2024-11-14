@@ -12,14 +12,16 @@ public class GlobalExceptionHandler {
 
   // Handle ResourceNotFoundException
   @ExceptionHandler(ResourceNotFoundException.class)
-  public ResponseEntity<ApiException> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+  public ResponseEntity<ApiException> handleResourceNotFoundException(ResourceNotFoundException ex,
+      WebRequest request) {
     ApiException apiError = new ApiException(ex.getMessage(), request.getDescription(false));
     return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
   }
 
   // Handle BadRequestException
   @ExceptionHandler(BadRequestException.class)
-  public ResponseEntity<ApiException> handleBadRequestException(BadRequestException ex, WebRequest request) {
+  public ResponseEntity<ApiException> handleBadRequestException(BadRequestException ex,
+      WebRequest request) {
     ApiException apiError = new ApiException(ex.getMessage(), request.getDescription(false));
     return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
   }

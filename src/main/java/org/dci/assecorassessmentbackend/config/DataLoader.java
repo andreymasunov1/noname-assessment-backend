@@ -18,6 +18,7 @@ public class DataLoader {
 
   /**
    * Constructor-based dependency injection for DataLoader.
+   *
    * @param dataSourceReader Service responsible for reading data source.
    * @param personRepository Repository for Person entities.
    */
@@ -27,9 +28,8 @@ public class DataLoader {
   }
 
   /**
-   * Initializes data loading process after bean construction.
-   * Reads data from the data source and saves it to the repository.
-   * Logs errors if the data loading process encounters issues.
+   * Initializes data loading process after bean construction. Reads data from the data source and
+   * saves it to the repository. Logs errors if the data loading process encounters issues.
    */
   @PostConstruct
   public void loadData() {
@@ -46,6 +46,7 @@ public class DataLoader {
 
   /**
    * Persists a list of Person entities in the database.
+   *
    * @param personList List of Person entities to save.
    */
   private void savePersons(List<Person> personList) {

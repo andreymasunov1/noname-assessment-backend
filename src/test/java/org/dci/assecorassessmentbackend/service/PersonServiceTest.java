@@ -1,5 +1,12 @@
 package org.dci.assecorassessmentbackend.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
 import org.apache.coyote.BadRequestException;
 import org.dci.assecorassessmentbackend.dto.PersonCreateDto;
 import org.dci.assecorassessmentbackend.dto.PersonDto;
@@ -13,12 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class PersonServiceTest {
 
@@ -84,12 +85,14 @@ class PersonServiceTest {
 
   @Test
   void getAllPersonsByColor_ShouldThrowResourceNotFoundException_WhenColorIsInvalid() {
-    assertThrows(ResourceNotFoundException.class, () -> personService.getAllPersonsByColor("invalidColor"));
+    assertThrows(ResourceNotFoundException.class,
+        () -> personService.getAllPersonsByColor("invalidColor"));
   }
 
   @Test
   void createPerson_ShouldReturnCreatedPersonDto_WhenDataIsValid() throws BadRequestException {
-    PersonCreateDto personCreateDto = new PersonCreateDto("Jane", "Doe", "54321", "Sample City", "blau");
+    PersonCreateDto personCreateDto = new PersonCreateDto("Jane", "Doe", "54321", "Sample City",
+        "blau");
     Person person = new Person(null, "Jane", "Doe", "54321", "Sample City", Color.BLAU);
     Person savedPerson = new Person(1L, "Jane", "Doe", "54321", "Sample City", Color.BLAU);
     PersonDto personDto = new PersonDto(1L, "Jane", "Doe", "54321", "Sample City", "blau");
@@ -107,8 +110,10 @@ class PersonServiceTest {
 
   @Test
   void createPerson_ShouldThrowBadRequestException_WhenColorIsInvalid() {
-    PersonCreateDto personCreateDto = new PersonCreateDto("Jane", "Doe", "54321", "Sample City", "invalidColor");
+    PersonCreateDto personCreateDto = new PersonCreateDto("Jane", "Doe", "54321", "Sample City",
+        "invalidColor");
 
-    assertThrows(ResourceNotFoundException.class, () -> personService.createPerson(personCreateDto));
+    assertThrows(ResourceNotFoundException.class,
+        () -> personService.createPerson(personCreateDto));
   }
 }

@@ -9,10 +9,10 @@ import org.dci.assecorassessmentbackend.exception.ResourceNotFoundException;
 import org.dci.assecorassessmentbackend.model.Color;
 import org.dci.assecorassessmentbackend.model.Person;
 import org.dci.assecorassessmentbackend.repository.PersonRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -29,6 +29,7 @@ public class PersonService {
 
   /**
    * Retrieves all persons and maps them to PersonDto.
+   *
    * @return List of PersonDto
    */
   @Transactional(readOnly = true)
@@ -40,6 +41,7 @@ public class PersonService {
 
   /**
    * Retrieves a person by ID.
+   *
    * @param id The ID of the person.
    * @return PersonDto of the person with the specified ID.
    * @throws ResponseStatusException if the person is not found or if mapping fails.
@@ -54,6 +56,7 @@ public class PersonService {
 
   /**
    * Retrieves all persons filtered by a specific color.
+   *
    * @param color The color to filter by.
    * @return List of PersonDto filtered by the specified color.
    * @throws ResourceNotFoundException if the color is not recognized.
@@ -68,6 +71,7 @@ public class PersonService {
 
   /**
    * Creates a new person.
+   *
    * @param personCreateDto The data transfer object containing person details.
    * @return The created person's PersonDto.
    * @throws ResponseStatusException if an invalid color is provided or mapping fails.
@@ -83,6 +87,7 @@ public class PersonService {
 
   /**
    * Maps a Person entity to PersonDto and handles mapping exceptions.
+   *
    * @param person The person entity.
    * @return Mapped PersonDto.
    * @throws ResponseStatusException if mapping fails.
@@ -91,12 +96,14 @@ public class PersonService {
     try {
       return personMapper.toPersonDto(person);
     } catch (Exception e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to map person to PersonDto", e);
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to map person to PersonDto",
+          e);
     }
   }
 
   /**
    * Parses and validates a color from its string representation.
+   *
    * @param color The color string.
    * @return The corresponding Color enum.
    * @throws ResourceNotFoundException if the color is invalid.
@@ -111,6 +118,7 @@ public class PersonService {
 
   /**
    * Parses and validates an ID from its string representation.
+   *
    * @param id The ID string.
    * @return The parsed Long ID.
    * @throws ResponseStatusException if the ID is invalid.

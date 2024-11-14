@@ -17,7 +17,8 @@ public enum Color {
 
   /**
    * Constructor for Color enum.
-   * @param code Numeric code associated with the color.
+   *
+   * @param code        Numeric code associated with the color.
    * @param displayName Display name of the color.
    */
   Color(int code, String displayName) {
@@ -26,23 +27,8 @@ public enum Color {
   }
 
   /**
-   * Gets the numeric code of the color.
-   * @return Integer code associated with the color.
-   */
-  public int getCode() {
-    return code;
-  }
-
-  /**
-   * Gets the display name of the color.
-   * @return String representing the display name of the color.
-   */
-  public String getDisplayName() {
-    return displayName;
-  }
-
-  /**
    * Retrieves a Color enum by its numeric code.
+   *
    * @param code Integer code associated with the color.
    * @return Color enum matching the specified code.
    * @throws IllegalArgumentException if no color matches the given code.
@@ -58,6 +44,7 @@ public enum Color {
 
   /**
    * Retrieves a Color enum by its display name.
+   *
    * @param displayName String display name of the color.
    * @return Color enum matching the specified display name.
    * @throws IllegalArgumentException if no color matches the given display name.
@@ -69,5 +56,23 @@ public enum Color {
       }
     }
     throw new IllegalArgumentException("Unknown color display name: " + displayName);
+  }
+
+  /**
+   * Gets the numeric code of the color.
+   *
+   * @return Integer code associated with the color.
+   */
+  public int getCode() {
+    return code;
+  }
+
+  /**
+   * Gets the display name of the color.
+   *
+   * @return String representing the display name of the color.
+   */
+  public String getDisplayName() {
+    return displayName;
   }
 }
